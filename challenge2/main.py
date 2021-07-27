@@ -1,16 +1,19 @@
 from flask import Flask, render_template
+from datetime import datetime
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     print('index_should_be_here')
-    return render_template('index.html')
+    now = datetime.now() # current date and time
+    date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
+    return render_template('index.html', date_time=date_time)
 
 @app.route('/temperature')
 def temperature():
     return 'the temperature is hot'
 
 if __name__ == '__main__':
-    app.run(debug=True, host="192.168.1.43")
+    app.run(debug=True)
 
