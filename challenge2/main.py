@@ -38,10 +38,17 @@ def hours(minutes, hours):
 
 
 # date with + days route
-'''
- @app.route('time/')
- def t():
-    return 'return current time'
-'''
+@app.route('/date/<dateday>')
+def dateday(dateday):
+    d = int(dateday)
+    print('workin on date')
+    now = datetime.now()  # current date and time
+    d = dateday
+    date_month = now.strftime("%m")
+    date_year = now.strftime("%Y")
+
+    return render_template('dateday.html', dateday=dateday, date_month=date_month, date_year=date_year)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=1234)
