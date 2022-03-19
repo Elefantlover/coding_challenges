@@ -1,5 +1,11 @@
+
+# Challenge 5 == return a random kanye west quote from http://localhost:1234/kanye
+# decided to use https://api.kanye.rest/
+
 from flask import Flask, render_template
 from datetime import datetime
+import requests
+
 
 app = Flask(__name__)
 
@@ -15,8 +21,9 @@ def index():
 @app.route('/kanye')
 def home():
     print("Hi, it's Kanye again")
-    return render_template("kanye.html")
+    quote = requests.get('https://api.kanye.rest/')
+    return render_template("kanye.html", quote=quote.json())
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=1234)
+    app.run(debug=True, port=1234, host='0.0.0.0')
